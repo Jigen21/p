@@ -7,6 +7,7 @@ import android.util.Log;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 class MyThread extends Thread
 {
@@ -33,6 +34,8 @@ class MyThread extends Thread
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

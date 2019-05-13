@@ -1,12 +1,25 @@
 package com.example.axelh.tpposta;
 
-public class Noticia
+import android.support.annotation.NonNull;
+
+import java.util.Date;
+
+public class Noticia implements Comparable<Noticia>
 {
 
     private String titulo;
     private String descripcion;
     private String linkimagen;
     private String linkpagina;
+    private Date fecha;
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
     public String getLinkpagina() {
         return linkpagina;
@@ -26,7 +39,7 @@ public class Noticia
         this.datosimagen = datosimagen;
     }
 
-    private String fecha;
+
 
     public Noticia()
     {
@@ -58,12 +71,9 @@ public class Noticia
     }
 
 
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    @Override
+    public int compareTo(@NonNull Noticia o)
+    {
+        return getFecha().compareTo(o.getFecha());
     }
 }

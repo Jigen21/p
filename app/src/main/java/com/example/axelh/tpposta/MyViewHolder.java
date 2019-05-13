@@ -16,6 +16,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClic
     ImageView imagen;
     int position;
     onClickNoticia listener;
+    TextView fecha;
 
 
 
@@ -25,6 +26,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClic
         titulo=itemView.findViewById(R.id.titulo);
         descripcion=itemView.findViewById(R.id.descripcion);
         imagen=itemView.findViewById(R.id.imagen);
+        fecha=itemView.findViewById(R.id.fecha);
         this.listener=listener;
         itemView.setOnClickListener(this);
 

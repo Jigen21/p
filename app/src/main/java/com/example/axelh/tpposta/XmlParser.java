@@ -8,13 +8,19 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class XmlParser
 {
 
-    public static List<Noticia> traerNoticias(String s) throws XmlPullParserException, IOException {
+    public static List<Noticia> traerNoticias(String s) throws XmlPullParserException, IOException, ParseException {
         List<Noticia> noticias = new ArrayList<Noticia>();
         XmlPullParser parser = Xml.newPullParser();
 
@@ -54,6 +60,28 @@ public class XmlParser
 
                         }
 
+                        if("pubDate".equals(parser.getName()))
+                        {
+
+                           // n.setFecha(parser.nextText());
+                            //DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
+                            //Date date = formatter.parse("Sat, 24 Apr 2010 14:01:00 GMT";
+                           // Log.d("FECHA",date.toString());
+
+                            //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+                            //Date date = parser.nextText();
+                          // DateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z",Locale.ENGLISH);
+                           // String pubDateText = formatter.format(parser.nextText());
+
+                            //DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz",Locale.ENGLISH);
+                            DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZZZ",Locale.ENGLISH);
+                            //Date date = formatter.parse("Sat, 24 Apr 2010 14:01:00 GMT");
+                            Date date = formatter.parse(parser.nextText());
+                            Log.d("fecha",date.toString());
+                            n.setFecha(date);
+
+                        }
+
                        /* if("image".equals(parser.getName()))
                         {
                             n.setLinkimagen(parser.nextText());
@@ -81,6 +109,9 @@ public class XmlParser
 
 
         }
+
+        Collections.sort(noticias);
+        //Collections.reverse(noticias);
 
         return noticias;
 
