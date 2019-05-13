@@ -8,16 +8,29 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
+//import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Handler.Callback , onClickNoticia
+public class MainActivity extends AppCompatActivity implements Handler.Callback , onClickNoticia , SearchView.OnQueryTextListener
 {
 
     MyAdapter adapter;
     List<Noticia> noticias = new ArrayList<Noticia>();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.example_menu, menu);
+        SearchView sv = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        sv.setOnQueryTextListener(this);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,4 +88,32 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
 
 
     }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        Log.d("TextSubmit", s);
+        this.adapter.filter(s);
+        /*this.noticias = this.myAdapter.getNoticias();
+        List<Noticia> noticiasFiltro = new ArrayList<>();
+        for (Noticia n : noticias) {
+            if(n.getTitulo().equalsIgnoreCase(query)) {
+                noticiasFiltro.add(n);
+            }
+        }
+        this.myAdapter.setNoticias(noticiasFiltro);
+        this.myAdapter.notifyDataSetChanged();*/
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        this.adapter.filter(newText);
+        //Se puede usar un pattern en Java o un indexOf para buscar coincidencias. Lo que se busca en el search, debe coincidir con el titulo de la noticia.
+        Log.d("TextChange", newText);
+        return false;
+    }
+
+
+
+
 }
