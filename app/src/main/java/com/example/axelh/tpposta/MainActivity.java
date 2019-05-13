@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        //el cambio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
