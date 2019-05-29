@@ -3,6 +3,7 @@ package com.example.axelh.tpposta;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>
     public MyAdapter(List<Noticia> noticias,onClickNoticia listener)
     {
         this.noticias = noticias;
-        noticiasFull = new ArrayList<>(noticias);
+       // noticiasFull = new ArrayList<>(noticias);
+       // this.noticiasFull = noticias;
+
         this.listener=listener;
     }
 
@@ -63,16 +66,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>
 
     public void setNoticias(List<Noticia> noticias) {
         this.noticias = noticias;
+       // this.noticiasFull = noticias;
+        noticiasFull = new ArrayList<>(noticias);
     }
 
     public void filter(String text) {
+
+        //this.noticias.clear();
         this.noticias.clear();
-        if(text.isEmpty()){
-            this.noticias.addAll(this.noticias);
-        } else{
+        if(text.isEmpty())
+        //if(text.equals("a"))
+        {
+            //ver porque lo cambie
+            Log.d("tamaño lista uno",this.noticias.toString());
+            Log.d("tamaño lista dos",this.noticiasFull.toString());
+            this.noticias.addAll(this.noticiasFull);
+            Log.d("noestavacio","asd");
+        }
+        else {
             text = text.toLowerCase();
-            for(Noticia item: this.noticias){
-                if(item.getTitulo().toLowerCase().contains(text)){
+            for(Noticia item: this.noticiasFull)
+            {
+                Log.d("titulo",item.getTitulo());
+                if(item.getTitulo().toLowerCase().contains(text))
+                {
                     this.noticias.add(item);
                 }
             }
